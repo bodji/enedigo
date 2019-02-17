@@ -3,6 +3,9 @@
 Enedigo is a Golang "SDK" for the Enedis "API"
 It's just a wrapper for the Enedis customer portal.
 
+The project follows the awesome work of : 
+@outadoc  https://github.com/outadoc/linkindle, for the original revese engineering of Enedis portal
+@beufanet https://github.com/beufanet/linkyndle, for the graphing part
 
 
 ## Create Enedis Client
