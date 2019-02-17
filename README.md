@@ -51,3 +51,23 @@ Where :
  - Power is the amount of kWH of the measure
  - IsOffpeak will tell you whether or not the mesure is off-peak (If you have configured off-peak periods obviously)
 
+
+
+## Pushing to InfluxDB
+I have created a little tool which mimic @beufanet python script in cmd/enedis2influx.go
+You just have to tune enedigo.yml file, and run it :
+
+     $ ./enedis2influx --days 3
+    2019/02/17 17:38:16 Will get last 3 days from Enedis
+    2019/02/17 17:38:16 Creating enedis client....
+    2019/02/17 17:38:18 Getting data from enedis...
+    2019/02/17 17:38:20 Got measure of 2019-02-12T00:00:00+01:00 : 1.634 | HC:0 | HP:1
+    2019/02/17 17:38:20 Got measure of 2019-02-12T00:30:00+01:00 : 1.658 | HC:0 | HP:1
+    2019/02/17 17:38:20 Got measure of 2019-02-12T01:00:00+01:00 : 2.828 | HC:0 | HP:1
+    2019/02/17 17:38:20 Got measure of 2019-02-12T01:30:00+01:00 : 2.329 | HC:1 | HP:0
+    2019/02/17 17:38:20 Got measure of 2019-02-12T02:00:00+01:00 : 1.621 | HC:1 | HP:0
+    2019/02/17 17:38:20 Got measure of 2019-02-12T02:30:00+01:00 : 1.639 | HC:1 | HP:0
+    2019/02/17 17:38:20 Got measure of 2019-02-12T03:00:00+01:00 : 1.617 | HC:1 | HP:0
+    2019/02/17 17:38:20 Got measure of 2019-02-12T03:30:00+01:00 : 1.622 | HC:1 | HP:0
+    .....
+    2019/02/17 17:38:20 Pushing 240 points to InfluxDB...
