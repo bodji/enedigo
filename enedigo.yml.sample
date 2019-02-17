@@ -1,0 +1,35 @@
+#
+# Enedigo configuration file
+#
+
+
+# Enedis
+#   -> user     : your login on Enedis website
+#   -> password : your password on Enedis website
+#   -> maxPower : the maximum power on your installation (in kWH) : usually 6 or 9)
+
+enedis:
+    user: ""
+    password: ""
+    maxPower: 6
+    offpeakPeriods:
+        - from: "01:00"
+          to: "07:00"
+
+        - from: "12:30"
+          to: "14:30"
+
+
+# InfluxDB settings
+#   -> url      : The URL of the influxDB http endpoint (ex: http://localhost:8086)
+#   -> user     : The user of influxdb access
+#   -> password : The password
+#   -> database : THe database you want to use
+#   -> measure  : The measurement you want to push points to
+
+influx:
+    url: "http://localhost:8086"
+    user: "linky"
+    password: ""
+    database: "linky"
+    measure: "conso_elec"
