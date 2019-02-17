@@ -20,6 +20,25 @@ enedis:
           to: "14:30"
 
 
+# Provider settings
+#   -> name                 : Name of your provider (just informational)
+#   -> annualFee            : Cost of the annual subcription (in €)
+#   -> maxPower             : Maximum capacity enabled on your subcription (6, 7, 9 kVA ...)
+#   -> peakOffpeakEnabled   : Whether or not you have an 'Peak/Offpeak' subcription
+#   -> pricePerKwh          : The price (in €) that you pay the kWH
+#   -> pricePerKwhPeak      : The price (in €) that you pay the kWH in peak hours
+#   -> pricePerKwhOffpeak   : The price (in €) that you pay the kWH in off-peak hours
+
+provider:
+    name: "EDF"
+    annualFee: 151.32
+    maxPower: 9
+    peakOffpeakEnabled: true
+    pricePerKwh: 0.1467
+    pricePerKwhPeak: 0.1579
+    pricePerKwhOffpeak: 0.1228
+
+
 # InfluxDB settings
 #   -> url      : The URL of the influxDB http endpoint (ex: http://localhost:8086)
 #   -> user     : The user of influxdb access
