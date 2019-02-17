@@ -164,7 +164,10 @@ func (c *Client) GetData(resolution string, from time.Time, to time.Time) (power
 
 		// Create new measure
 		pm := new(PowerMeasure)
-		pm.Date = from.Add(time.Second * time.Duration((measure.Order-1)*30*60))
+
+		// We compute measure date from order
+		// We add a milisecond for peak/off-peak easier computation
+		pm.Date = from.Add(time.Second*time.Duration((measure.Order-1)*30*60) + time.Millisecond)
 		pm.Power = measure.Value / 2 // We divide by two because order is 30min
 
 		// Test if off peak
