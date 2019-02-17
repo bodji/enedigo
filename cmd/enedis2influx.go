@@ -101,6 +101,9 @@ func main() {
 	log.Printf("	-> Price of the kWH (peak)   	 : %.4f €", conf.Provider.PricePerKwhPeak)
 	log.Printf("	-> Price of the kWH (off-peak)	 : %.4f €", conf.Provider.PricePerKwhOffpeak)
 
+	var totalKwh float64
+	var totalKwhPeak float64
+	var totalKwhOffpeak float64
 	var totalPrice float64
 	for _, measure := range measures {
 
@@ -141,20 +144,28 @@ func main() {
 		if conf.Provider.PeakOffpeakEnabled {
 			if measure.IsOffpeak {
 				priceToPay = conf.Provider.PricePerKwhOffpeak * measure.Power
+				totalKwhOffpeak += measure.Power
 			} else {
 				priceToPay = conf.Provider.PricePerKwhPeak * measure.Power
+				totalKwhPeak += measure.Power
 			}
 		} else {
 			priceToPay = conf.Provider.PricePerKwh * measure.Power
 		}
 
 		totalPrice += priceToPay
+		totalKwh += measure.Power
 
 		log.Printf("Got measure of %s : %.3f | HC:%s | HP:%s | HN:%s | PRICE:%.4f", measure.Date.Format(time.RFC3339), measure.Power, creuses, pleines, normales, priceToPay)
 
 	}
 
-	log.Printf("Total price for period : %.4f", totalPrice)
+	log.Printf("Total kWH for period 		: %.4f", totalKwh)
+	log.Printf("Total kWH (peak) for period 	: %.4f", totalKwhPeak)
+	log.Printf("Total kWH (offpeak) for period 	: %.4f", totalKwhOffpeak)
+	log.Printf("--")
+	log.Printf("Total price (NORMAL) 		: %.4f €", totalKwh*conf.Provider.PricePerKwh)
+	log.Printf("Total price (PEAK/OFFPEAK)  	: %.4f €", (totalKwhPeak*conf.Provider.PricePerKwhPeak)+(totalKwhOffpeak*conf.Provider.PricePerKwhOffpeak))
 
 	// Write the batch
 	log.Printf("Pushing %d points to InfluxDB...", len(bp.Points()))
