@@ -162,6 +162,11 @@ func (c *Client) GetData(resolution string, from time.Time, to time.Time) (power
 	// Make pretty response
 	for _, measure := range enedisDataReturn.Graphe.Data {
 
+		// Ignore invalid measures
+		if measure.Value <= 0 {
+			continue
+		}
+
 		// Create new measure
 		pm := new(PowerMeasure)
 
